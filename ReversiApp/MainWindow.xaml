@@ -1,0 +1,76 @@
+﻿<Window x:Class="ReversiApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ReversiApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="572.2" Width="575.8" ResizeMode="NoResize">
+    <Grid Height="527" Margin="10,10,3.6,0" VerticalAlignment="Top">
+        <Label x:Name="playerLabel" Content="プレイヤー設定" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" FontWeight="Bold"/>
+        <Label x:Name="player1Label" Content="黒番" HorizontalAlignment="Left" Margin="10,45,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="player1ComboBox" HorizontalAlignment="Left" Margin="46,45,0,0" VerticalAlignment="Top" Width="136" SelectionChanged="player1ComboBox_SelectionChanged"/>
+        <ComboBox x:Name="player2ComboBox" HorizontalAlignment="Left" Margin="46,72,0,0" VerticalAlignment="Top" Width="136" SelectionChanged="player2ComboBox_SelectionChanged"/>
+        <Label x:Name="player2Label" Content="白番" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="ruleLabel" Content="ルール設定" HorizontalAlignment="Left" Margin="10,106,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <CheckBox x:Name="goldenMassCheckBox" Content="特殊マスを使用する" HorizontalAlignment="Left" Margin="20,136,0,0" VerticalAlignment="Top" Click="goldenMassCheckBox_Click"/>
+        <Label x:Name="goldenMassLabel" Content="特殊マスの位置" HorizontalAlignment="Left" Margin="20,156,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+        <Label x:Name="goldenMassLeftLabel" Content="(" HorizontalAlignment="Left" Margin="102,156,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="goldenMassXTextBox" HorizontalAlignment="Left" Height="23" Margin="115,156,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="31" IsEnabled="False" TextAlignment="Right" TextChanged="goldenMassXTextBox_TextChanged"/>
+        <Label x:Name="goldenMassCommaLabel" Content="," HorizontalAlignment="Left" Margin="146,156,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="goldenMassYTextBox" HorizontalAlignment="Left" Height="23" Margin="159,156,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="31" IsEnabled="False" TextAlignment="Right" TextChanged="goldenMassYTextBox_TextChanged"/>
+        <Label x:Name="goldenMassRightLabel" Content=")" HorizontalAlignment="Left" Margin="190,156,0,0" VerticalAlignment="Top" Width="17" IsEnabled="False"/>
+        <Label x:Name="goldenMassPointLabel" Content="特殊ポイント" HorizontalAlignment="Left" Margin="20,187,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="goldenMassPointTextBox" HorizontalAlignment="Left" Height="26" Margin="115,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="75" IsEnabled="False" TextAlignment="Right" TextChanged="goldenMassPointTextBox_TextChanged"/>
+        <Label x:Name="autoPlayLabel" Content="再生設定" HorizontalAlignment="Left" Margin="10,218,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <CheckBox x:Name="autoPlayCheckBox" Content="自動再生する" HorizontalAlignment="Left" Margin="20,248,0,0" VerticalAlignment="Top" Click="autoPlayCheckBox_Click"/>
+        <Label x:Name="autoPlayTimeLabel" Content="自動再生時間" HorizontalAlignment="Left" Margin="20,268,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="autoPlayTimeTextBox" HorizontalAlignment="Left" Height="23" Margin="107,268,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="59" IsEnabled="False" TextAlignment="Right" TextChanged="autoPlayTimeTextBox_TextChanged"/>
+        <Label x:Name="autoPlayTimeSignLabel" Content="ms" HorizontalAlignment="Left" Margin="166,265,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+        <Label x:Name="buttleLabel" Content="対戦設定" HorizontalAlignment="Left" Margin="10,298,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="buttleCountLabel" Content="連続対戦回数" HorizontalAlignment="Left" Margin="20,318,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="buttleCountTextBox" HorizontalAlignment="Left" Height="23" Margin="107,318,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="59" TextAlignment="Right" TextChanged="buttleCountTextBox_TextChanged"/>
+        <Button x:Name="startButton" Content="開始" HorizontalAlignment="Left" Margin="20,351,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.549,-0.501" Click="startButton_Click"/>
+        <Button x:Name="nextButton" Content="次へ" HorizontalAlignment="Left" Margin="107,351,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.549,-0.501" Click="nextButton_Click" IsEnabled="False"/>
+        <DataGrid x:Name="resultDataGrid" HorizontalAlignment="Left" Margin="0,380,0,0" VerticalAlignment="Top" Height="107" Width="540" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="No" Width="40"
+                                    Binding="{Binding No, StringFormat=D2}" />
+                <DataGridTextColumn Header="勝者" Width="180"
+                                    Binding="{Binding Winner}" />
+                <DataGridTextColumn Header="決着方法" Width="120"
+                                    Binding="{Binding StatusText}" />
+                <DataGridTextColumn Header="黒番のスコア" Width="100"
+                                    Binding="{Binding Player1Score}" />
+                <DataGridTextColumn Header="白番のスコア" Width="100"
+                                    Binding="{Binding Player2Score}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label x:Name="boardLabel" Content="ボード" HorizontalAlignment="Left" Margin="239,10,0,0" VerticalAlignment="Top" Width="80" FontWeight="Bold"/>
+        <Label x:Name="notificationLabel" Content="黒番です。" HorizontalAlignment="Left" Margin="319,10,0,0" VerticalAlignment="Top" Width="195" Visibility="Hidden"/>
+        <Grid x:Name="boardGrid" HorizontalAlignment="Left" Height="285" Margin="239,45,0,0" VerticalAlignment="Top" Width="285">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Button x:Name="outputButton" Content="出力" HorizontalAlignment="Left" Margin="460,492,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.549,-0.501" Click="outputButton_Click"/>
+        <Button x:Name="clearButton" Content="結果のクリア" HorizontalAlignment="Left" Margin="370,492,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.549,-0.501" Click="clearResultButton_Click"/>
+    </Grid>
+</Window>
