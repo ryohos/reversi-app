@@ -567,11 +567,11 @@ namespace ReversiApp
 
                 var player1WinCount = this.ResultHistories.Count(x => x.Winner == result.Player1.Name);
                 var player2WinCount = this.ResultHistories.Count(x => x.Winner == result.Player2.Name);
-                if (player1WinCount > player2WinCount)
+                if (result.Player1.IsWinner == true)
                 {
                     MessageBox.Show(string.Format("{0}の勝ちです。{1}勝{2}敗", result.Player1.Name, player1WinCount, player2WinCount));
                 }
-                else if (player1WinCount < player2WinCount)
+                else if (result.Player2.IsWinner == true)
                 {
                     MessageBox.Show(string.Format("{0}の勝ちです。{1}勝{2}敗", result.Player2.Name, player2WinCount, player1WinCount));
                 }
